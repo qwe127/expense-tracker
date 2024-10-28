@@ -1,0 +1,39 @@
+{
+  	"card1": [
+		{
+			"balance": [
+				{
+				"total-balance": 0,
+				"total-expenses": 0,
+				"total-income": 0
+				}
+			],
+			"transactions": [
+				{
+					"id": 1,
+					"icon": "default",
+					"type": "Healthcare",
+					"amount": -300,
+					"info": "Bought antidepressants",
+					"date": "2020-05-26T19:00:00"
+				},
+				{
+					"id": 2,
+					"icon": "default",
+					"type": "Food",
+					"amount": -10,
+					"info": "Bought a cabbage",
+					"date": "2020-06-26T19:00:00"
+				},
+				{
+					"id": 3,
+					"icon": "default",
+					"type": "None",
+					"amount": 100,
+					"info": "Other",
+					"date": "2020-06-26T19:00:00"
+				}
+			]
+		}
+  	]
+}

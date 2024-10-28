@@ -1,0 +1,95 @@
+[
+	{
+		"name": "Card1",
+		"dateCreated": "2020-05-26",
+		"defaultBalance": 1000,
+		"transactionsData": [
+			{
+				"date": "2024-10-22",
+				"transactions": [
+					{
+						"id": 1,
+						"icon": "default",
+						"type": "Transportation",
+						"amount": 100,
+						"info": "Transportation",
+						"time": "2020-05-26T19:00:00",
+						"expense": true
+					}
+				]
+			},
+			{
+				"date": "2020-05-26",
+				"transactions": [
+					{
+						"id": 1,
+						"icon": "default",
+						"type": "Healthcare",
+						"amount": 300,
+						"info": "Bought antidepressants",
+						"time": "2020-05-26T19:00:00",
+						"expense": true
+					}
+				]
+			},
+			{
+				"date": "2020-05-25",
+				"transactions": [
+					{
+						"id": 1,
+						"icon": "default",
+						"type": "Shopping",
+						"amount": 100,
+						"info": "Other Expense",
+						"time": "2020-05-26T19:00:00",
+						"expense": true
+					},
+					{
+						"id": 2,
+						"icon": "default",
+						"type": "Income",
+						"amount": 1000,
+						"info": "Something",
+						"time": "2020-05-26T19:00:00",
+						"expense": false
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Card2",
+		"dateCreated": "2020-05-26",
+		"defaultBalance": 1000,
+		"transactionsData": [
+			{
+				"date": "2020-05-26",
+				"transactions": [
+					{
+						"id": 1,
+						"icon": "default",
+						"type": "Healthcare",
+						"amount": 300,
+						"info": "Healthcare",
+						"time": "2020-05-26T19:00:00",
+						"expense": true
+					}
+				]
+			},
+			{
+				"date": "2020-05-25",
+				"transactions": [
+					{
+						"id": 1,
+						"icon": "default",
+						"type": "Healthcare",
+						"amount": 600,
+						"info": "Day 25",
+						"time": "2020-05-26T19:00:00",
+						"expense": true
+					}
+				]
+			}
+		]
+	}
+]
