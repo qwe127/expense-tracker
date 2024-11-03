@@ -7,55 +7,120 @@ import NewTransactionComponent from './NewTransactionComponent'
 import CardSelector from './CardSelector'
 
 function App() {
-  const [data, setData] = useState(dummyData)
+  // const [data, setData] = useState(dummyData)
+  const [data, setData] = useState(JSON.parse(localStorage.getItem('data')) || [])
   const [newTransaction, setNewTransaction] = useState(false);
   const [cardSelector, setCardSelector] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(data.length ? data[0] : {});
-  const [filterBy, setFilterBy] = useState('total');
+  const [newCardForm, setNewCardForm] = useState(data.length ? false : true)
+  const [selectedCard, setSelectedCard] = useState(data.length ? data[0] : {"transactionsData": []});
   
-  const [cardName, setCardName] = useState(data.length ? data[0].name : 'Select a card');
+  const [filterBy, setFilterBy] = useState('total');
+  const [noCardSelected, setNoCardSelected] = useState(true)
+  
+  const [cardName, setCardName] = useState(data.length ? data[0].name : '');
   const [cardBalance, setCardBalance] = useState(0);
   const [expense, setExpense] = useState(0);
   const [income, setIncome] = useState(0);
+  const [totalExpense, setTotalExpense] = useState(0);
+  const [totalIncome, setTotalIncome] = useState(0);
+  
   const [selectedCurrency, setSelectedCurrency] = useState('$')
+
+  const date = new Date()
 
   useEffect(()=>{
     setCardBalance(0);
     setExpense(0);
     setIncome(0);
+    if (data.length){
+      setNoCardSelected(false)
+    }
     
-    function calculateBalance(){ 
-      if(cardName){
-        data.map(i => {
-            if((cardName).toLowerCase() === (i.name).toLowerCase()){
-              setSelectedCard(i);
-            }
-          })
-          performCalculations();
-          let calculatedBalance = Number(selectedCard.defaultBalance) + income - expense
-          setSelectedCurrency(selectedCard.selectedCurrency)
-          setCardBalance(calculatedBalance)        
-      }     
-    }
-      
-    function performCalculations(){
-      let expense = 0;
-      let income = 0;
+    if (data.length){
+      console.log('test')
+      function calculateBalance(){ 
+        if(cardName){
+          data.map(i => {
+              if((cardName).toLowerCase() === (i.name).toLowerCase()){
+                setSelectedCard(i);
+              }
+            })
+            performCalculations();
+            let calculatedBalance = Number(selectedCard.defaultBalance) + totalIncome - totalExpense
+            setSelectedCurrency(selectedCard.selectedCurrency)
+            setCardBalance(calculatedBalance)        
+        }     
+      }
+        
+      function performCalculations(){
+        let expense = 0;
+        let income = 0;
+        let totalExpense = 0;
+        let totalIncome = 0;
+        const currentDate = new Date();
 
-      if (data.length && selectedCard.transactionsData.length && filterBy === 'total'){
-        selectedCard.transactionsData.map(i => {i.transactions.map(e => e.expense ? expense = expense + e.amount : income = income + e.amount)})
+        if (data.length && selectedCard.transactionsData.length){
+          selectedCard.transactionsData.map(i => {i.transactions.map(e => {e.expense 
+            ? 
+              totalExpense = totalExpense + e.amount 
+            : 
+              totalIncome = totalIncome + e.amount
+            })})
+        }
+        
+        setTotalExpense(totalExpense);
+        setTotalIncome(totalIncome)
+        
+        if (data.length && selectedCard.transactionsData.length  && filterBy === 'total'){
+          selectedCard.transactionsData.map(i => {i.transactions.map(e => {e.expense 
+            ? 
+              expense = expense + e.amount
+            : 
+              income = income + e.amount
+            })})
+        }
+        else if (data.length && selectedCard.transactionsData.length && filterBy === 'year'){
+          selectedCard.transactionsData.map(i => {
+            console.log(i);
+            const mappedDate = new Date(Date.parse(i.date));
+            i.transactions.map(e => {
+              if (currentDate.getFullYear() === mappedDate.getFullYear() && e.type !== 'Income'){
+                console.log('match');
+                expense = expense + e.amount; 
+              }
+              else if (currentDate.getFullYear() === mappedDate.getFullYear() && e.type === 'Income'){
+                income = income + e.amount
+              }
+            })
+          })
+        }
+        else if (data.length && selectedCard.transactionsData.length && filterBy === 'month'){
+          selectedCard.transactionsData.map(i => {
+            console.log(i);
+            const mappedDate = new Date(Date.parse(i.date));
+            i.transactions.map(e => {
+              if (currentDate.getFullYear() === mappedDate.getFullYear() && currentDate.getMonth() === mappedDate.getMonth() && e.type !== 'Income'){
+                console.log('match');
+                expense = expense + e.amount; 
+              }
+              else if (currentDate.getFullYear() === mappedDate.getFullYear() && currentDate.getMonth() === mappedDate.getMonth() && e.type === 'Income'){
+                income = income + e.amount
+              }
+            })
+          })
+        }
+        setExpense(expense);
+        setIncome(income)
       }
-      else if (data.length && selectedCard.transactionsData.length && filterBy === 'month'){
-        selectedCard.transactionsData.map(i => {
-          console.log(i)
-        })
-      }
-      setExpense(expense);
-      setIncome(income)
+      calculateBalance();      
     }
-    calculateBalance();
-  }, [cardName, data, expense, income, cardSelector, selectedCard, setSelectedCard, filterBy])
+
+  }, [cardName, data, expense, income, cardSelector, selectedCard, setSelectedCard, filterBy, totalExpense, totalIncome])
   
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(data))   
+  },[data])
+
   function formatTime(number){
     return (number < 10 ? '0': '') + number;
   };
@@ -65,28 +130,41 @@ function App() {
     return month[number]
   }
 
+  function setAndSave(newData){
+    localStorage.setItem('data', JSON.stringify(newData))
+  }
+
   return (
     <>
-      <h1>Expense Tracker</h1>
-      {
-        !cardSelector && <button onClick={() => setCardSelector(!cardSelector)}>Change Card</button> 
-      }
       {
         !cardSelector 
         ? 
-          <div>
+          <div className='mainWrapper'>
             <Header 
-              cardName={cardName} 
+              cardName={cardName}
+              setCardName={cardName}
               data={data} 
               cardBalance={cardBalance} 
               setCardBalance={setCardBalance}
               selectedCurrency={selectedCurrency}
+              cardSelector={cardSelector}
+              setCardSelector={setCardSelector}
+              date={date}
+              formatTime={formatTime}
+              noCardSelected={noCardSelected}
+              setSelectedCard={setSelectedCard}
             />
-            <MainPage expense={expense} income={income} selectedCard={selectedCard}/>
-            <div>
-              {newTransaction 
-              ? <NewTransactionComponent 
-                  setDate={setData} 
+            <div className='secondaryWrapper'>
+              <MainPage filterBy={filterBy} setFilterBy={setFilterBy }expense={expense} income={income} selectedCard={selectedCard}/>
+              {noCardSelected 
+              ?
+                  <button onClick={()=>{setCardSelector(true)}} style={{width: '50%', height: '10dvh', margin: '1rem'}}>Create New Card</button>
+              :
+              newTransaction 
+              ? 
+                <NewTransactionComponent 
+                  data={data}
+                  setData={setData} 
                   setNewTransaction={setNewTransaction} 
                   selectedCard={selectedCard} 
                   formatTime={formatTime} 
@@ -97,8 +175,10 @@ function App() {
                   setExpense={setExpense}
                   income={income}
                   setIncome={setIncome}
+                  setAndSave={setAndSave}
                   /> 
-                : <HistoryPage 
+              : 
+                <HistoryPage 
                   data={data}
                   setData={setData}
                   setNewTransaction={setNewTransaction} 
@@ -107,25 +187,28 @@ function App() {
                   formatTime={formatTime}
                   getMonth={getMonth}
                   filterBy={filterBy}
+                  setAndSave={setAndSave}
                   />
                 }
             </div>
           </div> 
-          : <CardSelector 
-              data={data}
-              setData={setData}
-              cardName={cardName}
-              setCardName={setCardName}
-              setCardSelector={setCardSelector}
-              setSelectedCard={setSelectedCard}
-              formatTime={formatTime}
-              selectedCard={selectedCard}
+          : 
+          <div>
+            <CardSelector 
+                data={data}
+                setData={setData}
+                cardName={cardName}
+                setCardName={setCardName}
+                setCardSelector={setCardSelector}
+                setSelectedCard={setSelectedCard}
+                formatTime={formatTime}
+                selectedCard={selectedCard}
+                newCardForm={newCardForm}
+                setNewCardForm={setNewCardForm}
+                setAndSave={setAndSave}
             /> 
+          </div>
       }
-      <button onClick={() => {
-        console.log(data);
-        console.log(selectedCard)}}>Other</button>
-
     </>
   )
 }

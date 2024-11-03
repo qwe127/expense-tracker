@@ -1,11 +1,17 @@
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+:root {
+  /* width: 100%; */
+  /* height: 100dvh; */
+  font-family: "Montserrat", sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  background-image: url(/1.jpg);
+  background-size: cover;
+  animation-name: scaleBackground;
+  animation-duration: 3sec;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,15 +25,20 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: hsl(349, 40%, 56%)
 }
 
 body {
+  /* width: 100%; */
+  height: 100dvh;
+  
+
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  overflow-x: hidden;
+  justify-content: center;
+  text-align: center;
 }
 
 h1 {
@@ -42,27 +53,400 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  background-color: hsl(120, 25%, 5%, 0.9);
 }
 button:hover {
-  border-color: #646cff;
+  border-color: hsl(40, 50%, 50%);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+
+.mainWrapper{
+  background-color: hsla(95, 35%, 21%, 0.4);
+  /* width: 30rem;
+  height: 90dvh; */
+  margin: auto;
+  backdrop-filter: blur(1rem);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+}
+
+.header-cardName-Icon{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  place-items: center;
+  text-align: left;
+  padding: 0.2rem;
+}
+
+.header-cardName-Icon h1{
+  margin: 0;
+  margin-top: 0rem;
+  padding: 0;
+}
+.header-cardName-Icon svg{
+  margin: 0;
+  padding: 0;
+}
+
+.chartContainer{
+  width: 30rem;
+  height: 15rem;
+  margin-top: 0;
+  margin: auto;
+}
+
+.main-incomeExpense{
+  margin: 0.4rem;
+  /* display: flex;
+  flex-direction: row; */
+  /* justify-content: space-around; */
+  font-weight: 400;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 20rem;
+  margin: auto;
+  align-items: center;
+  
+}
+
+.main-buttons{
+  display: grid;
+  gap: 0.2rem;
+  width: 25rem;
+  margin: auto;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 0.85rem;
+  font-weight: 100;
+}
+
+.historyWrapper{
+  background-color: hsla(120, 15%, 10%, 0.4);
+  width: 70%;
+  height: 15rem;
+  margin: auto;
+  overflow-y: scroll;  
+  place-items: center;
+  padding: 1rem;
+  padding-top: 0;
+}
+
+.history-dayTotal{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-around;
+  place-items: center;
+}
+
+.history-dayTotal h3, p{
+  margin: 0;
+}
+
+.history-typeDelete{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  place-items: center;
+  align-items: center;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 3fr 1fr 1fr 0.2fr;
+}
+
+.history-typeDelete p{
+  margin: 0;
+  padding: 0;
+}
+.history-typeDelete svg{
+  margin: 0;
+  padding: 0.1rem;
+}
+
+.history-infoAndAmount{
+  display: flex;
+  flex-direction: row;
+  background-color: hsl(120, 20%, 70%, 0.5);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin: auto;
+  text-align: left;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1.2rem;
+}
+
+.fontThin{
+  font-weight: 200;
+  margin: 0;
+}
+
+.fontBold{
+  font-weight:500;
+  margin: 0;
+}
+
+.secondaryWrapper{
+  border-radius: 5px;
+  background-color: hsla(96, 36%, 10%, 0.61);
+  /* border-top-color: hsla(0, 0%, 0%, 0.26); */
+  margin: auto;
+  /* padding-bottom: 2rem; */
+}
+/* .secondaryWrapper button{
+  width: 100%;
+  margin: auto;
 } */
+
+/* .mainButtons{
+
+} */
+
+.mainChartButton{
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  margin: auto;
+}
+/* .mainChartButton svg{
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  margin: auto;
+  bottom: 3rem;
+  background-color: black;
+  border-radius: 5px;
+
+  padding: 0.3rem;
+
+  left: 28.8rem;
+
+} */
+
+.slide-fwd-center {
+	-webkit-animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-fwd-center 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.2rem;
+}
+
+
+@-webkit-keyframes slide-fwd-center {
+  0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+  }
+  100% {
+    -webkit-transform: translateZ(160px);
+            transform: translateZ(160px);
+  }
+}
+@keyframes slide-fwd-center {
+  0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+  }
+  100% {
+    -webkit-transform: translateZ(160px);
+            transform: translateZ(160px);
+  }
+}
+
+.newTransaction-svgTitle{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.newTransaction-svgTitle h2{
+  margin: auto;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  animation-name: slide-fwd-center;
+  animation-duration: 3s;
+}
+
+.newTransaction-svgTitle svg{
+
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.header-dateTime{
+  position: absolute;
+  padding-left: 1rem;
+  padding-top: 0.2rem;
+  font-weight: 200;
+  font-size: 0.7rem;
+}
+
+.historyCard{
+  padding-bottom: 1rem;
+}
+
+.expenseTypeSelector{
+  width:90%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 0.5fr 5fr 0.5fr;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.newTransaction-selector{
+  color: black;
+  fill: black;
+  font-size: 0.8rem
+}
+
+form{
+  background-color: hsla(120, 15%, 10%, 0.4);
+  padding: 0.5rem; 
+  border-radius: 5px;
+}
+
+.newTransaction-mainForm{
+
+  display: flex;
+  flex-direction: column;
+}
+
+.newTransaction-mainForm input{
+  border: transparent;
+  width: 90%;
+  border-radius: 5px;
+  background-color: hsl(120, 29%, 5%);
+  height: 2rem;
+  margin: auto;
+  font-family: inherit;
+
+}
+
+.newTransaction-confirmButton{
+  width: 50%;
+  position: relative;
+  margin: 1rem;
+}
+
+.newTransaction-date{
+  width: 90%;
+  margin: auto;
+  display: grid;
+}
+.newTransactionButton{
+  margin: 1rem;
+}
+
+@media screen and (max-width: 480px ) {
+
+  :root {
+    width: 100dvw;
+    margin: auto;
+  }
+
+  .mainWrapper {
+    position: relative;
+    margin: auto;
+    width: 23.5rem;
+    overflow: hidden;
+
+  }
+  .mainChartButton svg{ 
+    border-radius: 2px;
+    padding: 0.3rem;
+  }
+  form{
+    width: 20rem;
+    margin: auto;
+    height: 100%;
+  }
+  .newTransaction-svgTitle{
+    width: 19rem;
+    margin: auto;
+  }
+  .chartContainer{
+    width: 23rem;
+    height: 13rem;
+    margin: auto;
+  }
+  .main-buttons{
+    width: 23rem;
+    height: 2rem;
+  }
+}
+
+.secondaryWrapper button{
+  justify-content: flex-end;
+}
+
+@keyframes scaleBackground{
+  0% {
+    background-size: 100%;
+    scale: 1
+  }
+  50% {
+    background-size: 110%;
+    scale: 2
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
+.main-mainDiv{
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.cardSelector-svgAndTitle{
+  display: flex;
+  justify-content: center;
+  place-items: center;
+} 
+
+.cardSelector{
+  color: black;
+}
+
+.backdropFilter{
+  backdrop-filter: blur(1rem);
+}
+
+.newCardForm{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.newCardForm input{
+  border: transparent;
+  width: 90%;
+  border-radius: 5px;
+  background-color: hsl(120, 29%, 5%);
+  height: 2rem;
+  margin: auto;
+  font-family: inherit;
+}

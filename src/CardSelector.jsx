@@ -5,9 +5,8 @@ import { FaArrowLeft } from "react-icons/fa";
 import {useState, useEffect, useRef} from 'react'
 import NewCard from './NewCard';
 
-function CardSelector({data, setData, cardName, setCardName, setCardSelector, setSelectedCard, formatTime, selectedCard}) {
+function CardSelector({data, setData, cardName, setCardName, setCardSelector, setSelectedCard, formatTime, newCardForm, setNewCardForm, setAndSave}) {
     const [cardSelectorValues, setCardSelectorValues] = useState([])
-    const [newCardForm, setNewCardForm] = useState(cardName ? false : true)
 
     const selectorRef = useRef();
     
@@ -27,7 +26,6 @@ function CardSelector({data, setData, cardName, setCardName, setCardSelector, se
     }
 
     function handleDelete(){
-        console.log('test')
         if (cardName || cardName != ''){
             const filteredData = data.filter(i => i.name != cardName)
             setData(filteredData)
@@ -39,6 +37,7 @@ function CardSelector({data, setData, cardName, setCardName, setCardSelector, se
                 "incomeTotal": 0,
                 "transactionsData": []
             });
+            setAndSave(data)
         }
     }
 
@@ -46,13 +45,19 @@ function CardSelector({data, setData, cardName, setCardName, setCardSelector, se
         <>
             {!newCardForm 
             ?
-                <>
-                    <h1>Card Selector</h1>
-                    <FaArrowLeft onClick={() => {setCardSelector(false)}}/>
-                    <Select ref={selectorRef} isClearable options={cardSelectorValues} onChange={(e)=>{handleSelection(e)}}/>
-                    {cardName && <button onClick={() => {handleDelete()}}>Delete Card</button>}
-                    <button onClick={()=>setNewCardForm(true)}>Add New Card</button>  
-                </>   
+                <div className='backdropFilter'>
+                    <div className='cardSelector-svgAndTitle mainWrapper'>
+                        <FaArrowLeft className='returnButton' onClick={() => {setCardSelector(false)}}/>
+                        <h1 className='cardSelectorTitle fontThin'>Card Selector</h1>                        
+                    </div>
+                    <div className='secondaryWrapper'>
+                        <h2>Selected Card: {cardName}</h2>
+                        <Select className='cardSelector' ref={selectorRef} options={cardSelectorValues} onChange={(e)=>{handleSelection(e)}}/>
+                        {cardName && <button onClick={() => {handleDelete()}}>Delete Card</button>}
+                        <button onClick={()=>setNewCardForm(true)}>Add New Card</button>                         
+                    </div>
+
+                </div>   
             :
                 <NewCard 
                     data={data}
@@ -61,6 +66,7 @@ function CardSelector({data, setData, cardName, setCardName, setCardSelector, se
                     formatTime={formatTime}
                     setCardName={setCardName}
                     setCardSelector={setCardSelector}
+                    setAndSave={setAndSave}
                 />
             }
         </>

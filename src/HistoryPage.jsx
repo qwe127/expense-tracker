@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import { FaArrowsRotate } from "react-icons/fa6";
 import { BsBackspaceFill } from "react-icons/bs";
 
-function HistoryPage({setNewTransaction, data, setData, selectedCard, formatTime, getMonth}){
+function HistoryPage({setNewTransaction, data, setData, selectedCard, formatTime, getMonth, setAndSave}){
     
     function formatDate(date){
         const dateParse = new Date(date)
@@ -19,10 +18,6 @@ function HistoryPage({setNewTransaction, data, setData, selectedCard, formatTime
 
     function handleDelete(mappedData, transactionObject){
         const card = selectedCard
-        console.log('mappedData:')
-        console.log(mappedData)
-        console.log('transactionObject:')
-        console.log(transactionObject)
 
         if (mappedData.transactions.length <= 1){
             for (let i = 0; i < card.transactionsData.length; i++){
@@ -35,50 +30,59 @@ function HistoryPage({setNewTransaction, data, setData, selectedCard, formatTime
             console.log('remove len +2')
             card.transactionsData.map(i => {
                 for (let e = 0; e < i.transactions.length; e++){
-                    console.log(i.transactions[e])
                     if (i.transactions[e] === transactionObject){
-                        console.log('true')
                         i.transactions.splice(e, 1)
                     }
                 }
             })
         }
         setData([...data])
+        setAndSave(data)
     }
     
     return(
         <>
         {selectedCard.name !== '' && selectedCard.transactionsData.length ?
-            <>
-                <h2>History:</h2>   
+            <> 
                 <div>
-                    {
-                        selectedCard.transactionsData.map((i, index) => {
-                            return(
-                                <>
-                                    <span key={index}>
-                                        <h3>{`${formatDate(i.date)}:`}</h3>
-                                        {totalExpensePerDay(i)}
-                                    </span>                                
-                                    {i.transactions.map((e, index) => {
-                                        return(
-                                            <>
-                                                <span key={index}>
-                                                    <p>{e.type}</p>
-                                                    <p>{`${e.info} (${formatTime(new Date(e.time).getHours())}:${formatTime(new Date(e.time).getMinutes())}:${formatTime(new Date(e.time).getSeconds())})`}</p>
-                                                    {e.expense ? <p>-{e.amount}</p> : <p>{e.amount}</p>}
-                                                    <BsBackspaceFill onClick={() => handleDelete(i, e)}/>
-                                                </span>
-                                            </>
-                                            )
-                                        }
-                                    )}
-                                </>
-                            )
-                        })
-                    }
-                </div>
-                <button onClick={() => {setNewTransaction(true)}}>New Transaction</button>    
+                <h2 className='fontBold'>History</h2>   
+                    <div className='historyWrapper'>
+                        {
+                            selectedCard.transactionsData.map((i, index) => {
+                                return(
+                                    <>
+                                        <hr />
+                                        <span className='history-dayTotal' key={index}>
+                                            <h3>{`${formatDate(i.date)}`}</h3>
+                                            {totalExpensePerDay(i)}
+                                        </span>    
+                                        <hr />                            
+                                        {i.transactions.map((e, index) => {
+                                            return(
+                                                <>
+                                                    <span className='historyCard' key={index}>
+                                                        <div style={e.expense ? {borderLeftColor: "hsl(0, 67%, 57%)", borderLeftStyle: "solid", backgroundColor:"hsl(0, 35%, 5%, 0.8)"}:{borderLeftColor: "hsl(120, 35%, 65%, 0.7)", borderLeftStyle: "solid", backgroundColor:"hsl(120, 35%, 5%, 0.8)"}} className='history-typeDelete'>
+                                                            <p>{`${e.type}`}</p> 
+                                                            <p>{`${formatTime(new Date(e.time).getHours())}:${formatTime(new Date(e.time).getMinutes())}`}</p>
+                                                            {e.expense ? <p>-{e.amount}</p> : <p>{e.amount}</p>}                                                      
+                                                            <BsBackspaceFill size={24} onClick={() => handleDelete(i, e)}/>                                                        
+                                                        </div>
+                                                        <div style={e.expense ? { backgroundColor: "hsl(0, 67%, 57%)"} : { backgroundColor: "hsl(120, 35%, 65%, 0.7)"}} className='history-infoAndAmount'>
+                                                            <p style={{ wordBreak: "break-word"}}>{`${e.info}`}</p>                                                        
+                                                        </div>
+                                                    
+                                                    </span>
+                                                </>
+                                                )
+                                            }
+                                        )}
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
+                </div>  
+                <button className="newTransactionButton" onClick={() => {setNewTransaction(true)}}>New Transaction</button> 
             </>
             : selectedCard.name !== '' ? <button onClick={() => {setNewTransaction(true)}}>New Transaction</button>:<></>  
     }
@@ -94,6 +98,7 @@ HistoryPage.propTypes = {
     setData: PropTypes.func,
     selectedCard: PropTypes.object,
     formatTime: PropTypes.func,
-    getMonth: PropTypes.func
+    getMonth: PropTypes.func,
+    setAndSave: PropTypes.func
 }
 export default HistoryPage

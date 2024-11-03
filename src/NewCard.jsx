@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import {useRef, useState} from 'react';
 
-function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCardSelector}) {
+function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCardSelector, setAndSave}) {
     const regex=/^[0-9.]+$/;
     const currencySymbols = [
         {value: "$", label: "$"},
@@ -35,6 +35,7 @@ function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCar
                 "transactionsData": []
             }
             setData([...data, cardToSave])
+            setAndSave(data)
             setCardName(newCardName);
             setNewCardName('');
             setStartingBalance('');
@@ -45,16 +46,19 @@ function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCar
     }
 
     return(
-        <>
-            <FaArrowLeft onClick={() => setNewCardForm(false)}/>
-            <form>
+        <div className="">
+            <div className="cardSelector-svgAndTitle">
+                <FaArrowLeft onClick={() => setNewCardForm(false)}/>
+                <h1 className='cardSelectorTitle fontThin'>New Card</h1>                 
+            </div>
+
+            <form className='newCardForm'>
                 <input value={newCardName} required onChange={(e) => setNewCardName(e.target.value)}placeholder="Name"></input>
                 <input value={startingBalance} required onChange={(e) => setStartingBalance(e.target.value)}placeholder="Starting Balance"></input>
                 <Select placeholder='Currency Type' ref={selectorRef} required options={currencySymbols} onChange={(e) => {setSelectedCurrency(e.value)}}/>
-                <p>{selectedCurrency}</p>
-                <button onClick={(e)=>{validateFormAndSaveCard(e)}}>Submit</button>
-            </form>        
-        </>
+            </form>    
+            <button onClick={(e)=>{validateFormAndSaveCard(e)}}>Submit</button>    
+        </div>
 
     )
 }
@@ -65,6 +69,7 @@ NewCard.propTypes = {
     setData: PropTypes.func,
     formatTime: PropTypes.func,
     setCardName: PropTypes.func,
-    setCardSelector: PropTypes.func
+    setCardSelector: PropTypes.func,
+    setAndSave: PropTypes.func
 }
 export default NewCard
