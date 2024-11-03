@@ -51,7 +51,7 @@ function CardSelector({data, setData, cardName, setCardName, setCardSelector, se
                         <h1 className='cardSelectorTitle fontThin'>Card Selector</h1>                        
                     </div>
                     <div className='secondaryWrapper'>
-                        <h2>Selected Card: {cardName}</h2>
+                        <h2>Selected Card: <strong>{cardName}</strong></h2>
                         <Select className='cardSelector' ref={selectorRef} options={cardSelectorValues} onChange={(e)=>{handleSelection(e)}}/>
                         {cardName && <button onClick={() => {handleDelete()}}>Delete Card</button>}
                         <button onClick={()=>setNewCardForm(true)}>Add New Card</button>                         
@@ -81,7 +81,10 @@ CardSelector.propTypes = {
     setCardSelector: PropTypes.func,
     setSelectedCard: PropTypes.func,
     formatTime: PropTypes.func,
-    selectedCard: PropTypes.object
+    selectedCard: PropTypes.object,
+    newCardForm: PropTypes.bool,
+    setNewCardForm: PropTypes.func,
+    setAndSave: PropTypes.func
 }
 
 export default CardSelector

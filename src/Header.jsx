@@ -31,6 +31,9 @@ Header.propTypes = {
     selectedCurrency: PropTypes.string,
     cardSelector: PropTypes.bool,
     setCardSelector: PropTypes.func,
+    setCardName: PropTypes.func,
+    noCardSelected: PropTypes.bool,
+    setSelectedCard: PropTypes.func
 }
 
 export default Header

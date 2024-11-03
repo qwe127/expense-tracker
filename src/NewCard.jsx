@@ -56,7 +56,7 @@ function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCar
                 <p>Name: </p>
                 <input value={newCardName} required onChange={(e) => setNewCardName(e.target.value)}placeholder="Name"></input>
                 <p>Starting Balance: </p>
-                <input value={startingBalance} required onChange={(e) => setStartingBalance(e.target.value)}placeholder="Starting Balance"></input>
+                <input type='number' value={startingBalance} required onChange={(e) => setStartingBalance(e.target.value)}placeholder="Starting Balance"></input>
                 <p>Currency Type: </p>
                 <Select className='currencySelector' placeholder='Currency Type' ref={selectorRef} required options={currencySymbols} onChange={(e) => {setSelectedCurrency(e.value)}}/>
             </form>    

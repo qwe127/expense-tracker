@@ -428,6 +428,10 @@ form{
   place-items: center;
 } 
 
+.cardSelector-svgAndTitle svg{
+  justify-content:flex-start
+} 
+
 .cardSelector{
   color: black;
 }
@@ -464,6 +468,6 @@ form{
 }
 
 h2{
-  margin: 0;
-  font-weight: 300;
+  margin: 1rem;
+  font-weight: 200;
 }

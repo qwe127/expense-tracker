@@ -1,6 +1,6 @@
 import {useState, useRef, useEffect} from 'react';
 import { FaArrowLeft } from "react-icons/fa";
-import { FaWallet } from "react-icons/fa6";
+// import { FaWallet } from "react-icons/fa6";
 import { FaRegTrashCan } from "react-icons/fa6";
 
 import CreatableSelect from 'react-select/creatable';
@@ -23,7 +23,7 @@ function NewTransaction({data, setData, setNewTransaction, selectedCard, setSele
     const [info, setInfo] = useState('');
     const [type, setType] = useState();
     const [amount, setAmount] = useState(0);
-    const [icon, setIcon] = useState('default')
+    // const [icon, setIcon] = useState('default')
 
     const [date, setDate] = useState(new Date());
     const [customDate, setCustomDate] = useState('');
@@ -86,7 +86,7 @@ function NewTransaction({data, setData, setNewTransaction, selectedCard, setSele
                     hasDate = true;
                     transactionToAdd = {
                         "id": i.transactions.length ? i.transactions.length + 1 : 1,
-                        "icon": icon,
+                        // "icon": icon,
                         "type": isExpense ? type : 'Income',
                         "amount": Number(amount),
                         "info": info,
@@ -106,7 +106,7 @@ function NewTransaction({data, setData, setNewTransaction, selectedCard, setSele
                     "transactions": [
                         {
                             "id": 1,
-                            "icon": icon,
+                            // "icon": icon,
                             "type": isExpense ? type : 'Income',
                             "amount": Number(amount),
                             "info": info,

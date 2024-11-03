@@ -1,9 +1,9 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList, ResponsiveContainer, Tooltip } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from 'recharts';
 
 import PropTypes from 'prop-types'
 
 import { useState, useEffect } from 'react';
-import { NonceProvider } from 'react-select';
+// import { NonceProvider } from 'react-select';
 function Chart({selectedCard, income, expense, filterBy, showChart}){
     const [chartDataState, setChartData] = useState([])
     
