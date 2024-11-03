@@ -42,11 +42,11 @@ function CardSelector({data, setData, cardName, setCardName, setCardSelector, se
     }
 
     return(
-        <>
+        <div className='backdropFilter'>
             {!newCardForm 
             ?
-                <div className='backdropFilter'>
-                    <div className='cardSelector-svgAndTitle mainWrapper'>
+                <div>
+                    <div className='cardSelector-svgAndTitle'>
                         <FaArrowLeft className='returnButton' onClick={() => {setCardSelector(false)}}/>
                         <h1 className='cardSelectorTitle fontThin'>Card Selector</h1>                        
                     </div>
@@ -69,7 +69,7 @@ function CardSelector({data, setData, cardName, setCardName, setCardSelector, se
                     setAndSave={setAndSave}
                 />
             }
-        </>
+        </div>
     )
 }
 CardSelector.propTypes = {

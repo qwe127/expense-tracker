@@ -434,19 +434,36 @@ form{
 
 .backdropFilter{
   backdrop-filter: blur(1rem);
+  border-radius: 5px;
 }
 
 .newCardForm{
   display: grid;
   grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  border-radius: 5px;
 }
 
 .newCardForm input{
   border: transparent;
   width: 90%;
+  height: 3rem;
   border-radius: 5px;
   background-color: hsl(120, 29%, 5%);
-  height: 2rem;
   margin: auto;
   font-family: inherit;
+  margin: 0.3rem;
+}
+
+.currencySelector{
+  color: black;
+  width: 90%;
+  margin: auto;
+}
+
+h2{
+  margin: 0;
+  font-weight: 300;
 }
