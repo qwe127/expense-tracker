@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import dummyData from './assets/data.json'
+// import dummyData from './assets/data.json'
 import Header from './Header'
 import MainPage from './MainPage'
 import HistoryPage from './HistoryPage'

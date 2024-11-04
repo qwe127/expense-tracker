@@ -160,7 +160,20 @@ function NewTransaction({data, setData, setNewTransaction, selectedCard, setSele
                     <>
                         <div className='expenseTypeSelector'>
                         <button onClick={()=> setIsExpense(!isExpense)}>{isExpense ? "Expense" : "Income"}</button>
-                            <CreatableSelect className='newTransaction-selector' required ref={selectorRef} options={typeValues} onChange={(e)=> handleSelectChange(e)}/>
+                            <CreatableSelect 
+                                styles={{
+                                    control: (baseStyles) => ({
+                                        ...baseStyles,
+                                        color: 'black',
+                                        fill: 'black'
+                                    }),
+                                }}
+                                className='newTransaction-selector' 
+                                required 
+                                ref={selectorRef} 
+                                options={typeValues} 
+                                onChange={(e)=> handleSelectChange(e)}
+                                />
                             <FaRegTrashCan className='newTransaction-deleteTypeButton' size={30} onClick={() => handleSelectDelete()}/>
                         </div>   
                     </>                      
