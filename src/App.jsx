@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react'
 // import dummyData from './assets/data.json'
 import Header from './Header'
 import MainPage from './MainPage'
-import HistoryPage from './HistoryPage'
+// import HistoryPage from './HistoryPage'
+import HistoryPageChanged from './HistoryPageChanged'
 import NewTransactionComponent from './NewTransactionComponent'
 import CardSelector from './CardSelector'
+
+
 
 function App() {
   // const [data, setData] = useState(dummyData)
@@ -37,7 +40,7 @@ function App() {
     }
     
     if (data.length){
-      console.log('test')
+      // console.log('test')
       function calculateBalance(){ 
         if(cardName){
           data.map(i => {
@@ -81,11 +84,11 @@ function App() {
         }
         else if (data.length && selectedCard.transactionsData.length && filterBy === 'year'){
           selectedCard.transactionsData.map(i => {
-            console.log(i);
+            // console.log(i);
             const mappedDate = new Date(Date.parse(i.date));
             i.transactions.map(e => {
               if (currentDate.getFullYear() === mappedDate.getFullYear() && e.type !== 'Income'){
-                console.log('match');
+                // console.log('match');
                 expense = expense + e.amount; 
               }
               else if (currentDate.getFullYear() === mappedDate.getFullYear() && e.type === 'Income'){
@@ -96,11 +99,11 @@ function App() {
         }
         else if (data.length && selectedCard.transactionsData.length && filterBy === 'month'){
           selectedCard.transactionsData.map(i => {
-            console.log(i);
+            // console.log(i);
             const mappedDate = new Date(Date.parse(i.date));
             i.transactions.map(e => {
               if (currentDate.getFullYear() === mappedDate.getFullYear() && currentDate.getMonth() === mappedDate.getMonth() && e.type !== 'Income'){
-                console.log('match');
+                // console.log('match');
                 expense = expense + e.amount; 
               }
               else if (currentDate.getFullYear() === mappedDate.getFullYear() && currentDate.getMonth() === mappedDate.getMonth() && e.type === 'Income'){
@@ -136,6 +139,18 @@ function App() {
 
   return (
     <>
+      {/* <HistoryPageChanged
+                  data={data}
+                  setData={setData}
+                  setNewTransaction={setNewTransaction} 
+                  selectedCard={selectedCard}
+                  setSelectedCard={setSelectedCard} 
+                  formatTime={formatTime}
+                  getMonth={getMonth}
+                  filterBy={filterBy}
+                  setAndSave={setAndSave}
+                  date={date}
+                  /> */}
       {
         !cardSelector 
         ? 
@@ -178,7 +193,18 @@ function App() {
                   setAndSave={setAndSave}
                   /> 
               : 
-                <HistoryPage 
+                // <HistoryPage 
+                //   data={data}
+                //   setData={setData}
+                //   setNewTransaction={setNewTransaction} 
+                //   selectedCard={selectedCard}
+                //   setSelectedCard={setSelectedCard} 
+                //   formatTime={formatTime}
+                //   getMonth={getMonth}
+                //   filterBy={filterBy}
+                //   setAndSave={setAndSave}
+                //   />
+                <HistoryPageChanged
                   data={data}
                   setData={setData}
                   setNewTransaction={setNewTransaction} 
@@ -188,7 +214,8 @@ function App() {
                   getMonth={getMonth}
                   filterBy={filterBy}
                   setAndSave={setAndSave}
-                  />
+                  date={date}
+                /> 
                 }
             </div>
           </div> 

@@ -96,7 +96,7 @@ function Chart({selectedCard, income, expense, filterBy, showChart}){
                             >
                             <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} style={{ textAnchor: 'center', fontSize: '80%', fill: 'hsla(0, 0%, 100%, 0.87)' }}/>
                             <YAxis style={{ fontSize: '80%', fill: 'hsla(0, 0%, 100%, 0.2)' }}/>
-                            <Tooltip contentStyle={{background: 'white', border: 'none', borderRadius: '5px'}} labelStyle={{color: 'black'}}/>
+                            <Tooltip contentStyle={{background: 'hsl(0, 20%, 20%, 0.9)', border: 'none', borderRadius: '5px', backgroundColor:'black', textAlign: 'left'}} labelStyle={{color: 'white'}}/>
                             <CartesianGrid strokeDasharray="3 3" />
                             <Bar dataKey={"amount"} fill="hsl(0, 67%, 57%, 0.9)" background={{ fill: '#eee' }}>
                                 {/* <LabelList angle="90" dataKey="name" position="center" style={{fill: 'white', fontWeight: 100}} clockWise='true'/> */}

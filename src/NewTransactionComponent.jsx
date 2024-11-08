@@ -90,11 +90,12 @@ function NewTransaction({data, setData, setNewTransaction, selectedCard, setSele
                         "type": isExpense ? type : 'Income',
                         "amount": Number(amount),
                         "info": info,
-                        "time": `${date.getFullYear()}T${formatTime(date.getHours())}:${formatTime(date.getMinutes())}:${formatTime(date.getSeconds())}`,
+                        "time": currentDateBool 
+                            ? `${currentDate}T${formatTime(date.getHours())}:${formatTime(date.getMinutes())}:${formatTime(date.getSeconds())}`
+                            : `${customDate}T${formatTime(date.getHours())}:${formatTime(date.getMinutes())}:${formatTime(date.getSeconds())}`,
                         "expense": isExpense
                     }
                     i.transactions.push(transactionToAdd)
-
                     setCardBalance(isExpense ? cardBalance - Number(amount) : cardBalance + Number(amount));
                     isExpense ? setExpense(expense + Number(amount)): setIncome(income + Number(amount));
                 } 
@@ -110,7 +111,9 @@ function NewTransaction({data, setData, setNewTransaction, selectedCard, setSele
                             "type": isExpense ? type : 'Income',
                             "amount": Number(amount),
                             "info": info,
-                            "time": `${date.getFullYear()}T${formatTime(date.getHours())}:${formatTime(date.getMinutes())}:${formatTime(date.getSeconds())}`,
+                            "time": currentDateBool 
+                                ? `${currentDate}T${formatTime(date.getHours())}:${formatTime(date.getMinutes())}:${formatTime(date.getSeconds())}`
+                                : `${customDate}T${formatTime(date.getHours())}:${formatTime(date.getMinutes())}:${formatTime(date.getSeconds())}`,
                             "expense": isExpense
                         }
                     ]

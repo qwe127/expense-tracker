@@ -49,9 +49,10 @@ function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCar
         <div className="">
             <div className="cardSelector-svgAndTitle">
                 <FaArrowLeft onClick={() => setNewCardForm(false)}/>
-                <h1 className='cardSelectorTitle fontThin'>New Card</h1>                 
+                <h1 className='cardSelectorTitle fontThin'>New Card</h1>
+                <span/>                 
             </div>
-
+            <hr/>
             <form className='newCardForm'>
                 <p>Name: </p>
                 <input value={newCardName} required onChange={(e) => setNewCardName(e.target.value)}placeholder="Name"></input>

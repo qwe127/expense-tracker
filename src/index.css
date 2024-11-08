@@ -42,8 +42,8 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2rem;
+
 }
 
 button {
@@ -112,20 +112,27 @@ button:focus-visible {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 20rem;
+  justify-content: center;
   margin: auto;
   align-items: center;
-  
+}
+
+.main-incomeExpense p{
+  font-size: 0.9rem;
 }
 
 .main-buttons{
   display: grid;
-  gap: 0.2rem;
-  width: 25rem;
-  margin: auto;
-  grid-template-columns: repeat(3, 1fr);
-  font-size: 0.85rem;
+
+  grid-template-columns: 30% 30% 30%;
+  justify-content: center;
+  font-size: 0.8rem;
   font-weight: 100;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 
 .historyWrapper{
   background-color: hsla(120, 15%, 10%, 0.4);
@@ -203,14 +210,18 @@ button:focus-visible {
   margin: auto;
   /* padding-bottom: 2rem; */
 }
+
+.secondaryWrapper h2{
+  margin: 0.5rem;
+} 
 /* .secondaryWrapper button{
   width: 100%;
   margin: auto;
 } */
 
-/* .mainButtons{
-
-} */
+.mainButtons{
+  margin: 0.5rem;
+}
 
 .mainChartButton{
   position: relative;
@@ -391,6 +402,8 @@ form{
     width: 23rem;
     height: 13rem;
     margin: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
   }
   .main-buttons{
     width: 23rem;
@@ -420,16 +433,23 @@ form{
   justify-content: center;
   align-items: center;
   margin: auto;
+  width: 100%
 }
 
 .cardSelector-svgAndTitle{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   place-items: center;
+} 
+.cardSelector-svgAndTitle h1{
+  justify-self: center;
+  word-break: break-all;
+  font-size: 2rem;
 } 
 
 .cardSelector-svgAndTitle svg{
-  justify-content:flex-start
+  position: relative;
+  align-items: start;
 } 
 
 .cardSelector{
@@ -476,4 +496,28 @@ form{
 h2{
   margin: 1rem;
   font-weight: 200;
+}
+
+.historyMonthSelector{
+  align-items: center;
+  width: 100%;
+  margin: auto;
+  justify-content: space-between;
+
+  background: hsla(30, 25%, 6%, 0.733);
+  backdrop-filter: blur(30px);
+}
+
+.historyMonthSelector h3{
+  margin: 0;
+  margin-top: 0.2rem;
+}
+
+hr{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.2rem;
+  color: black;
+  border-radius: 5px
 }

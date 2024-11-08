@@ -48,8 +48,10 @@ function CardSelector({data, setData, cardName, setCardName, setCardSelector, se
                 <div>
                     <div className='cardSelector-svgAndTitle'>
                         <FaArrowLeft className='returnButton' onClick={() => {setCardSelector(false)}}/>
-                        <h1 className='cardSelectorTitle fontThin'>Card Selector</h1>                        
+                        <h1 className='cardSelectorTitle fontThin'>Card Selector</h1>
+                        <span/>                   
                     </div>
+                    <hr/>
                     <div className='secondaryWrapper'>
                         <h2>Selected Card: <strong>{cardName}</strong></h2>
                         <Select className='cardSelector' ref={selectorRef} options={cardSelectorValues} onChange={(e)=>{handleSelection(e)}}/>

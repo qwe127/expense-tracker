@@ -15,7 +15,7 @@ function Header({cardName, setCardName, cardBalance, selectedCurrency, cardSelec
                         </div>
                         
                         <div className="header-currentBalance">
-                            <h2 className='fontThin'>Balance: <strong>{selectedCurrency}{cardBalance}</strong></h2>              
+                            <h2 className='fontThin' style={{ wordBreak: "break-word"}}>Balance: <strong>{selectedCurrency}{cardBalance}</strong></h2>              
                         </div> 
                     </>
                 :
