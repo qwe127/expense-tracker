@@ -2,30 +2,38 @@ import { FaArrowLeft } from "react-icons/fa";
 // import Select from 'react-select';
 import PropTypes from 'prop-types';
 
-import {useState} from 'react';
+import {useRef, useState, useEffect} from 'react';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCardSelector, setAndSave}) {
     const regex=/^[0-9.]+$/;
-    const currencySymbols = [
-        {value: "$", label: "$"},
-        {value: "€", label: "€"},
-        {value: "¥", label: "¥"},
-        {value: "₩", label: "₩"},
-        {value: "₴", label: "₴"},
-        {value: "₽", label: "₽"},
-        {value: "zł", label: "zł"},
-    ]
+    const currencySymbols = ["$","€","¥","₩","₴","₽","zł"];
+
+    // const currencySymbols = [
+    //     {value: "$", label: "$"},
+    //     {value: "€", label: "€"},
+    //     {value: "¥", label: "¥"},
+    //     {value: "₩", label: "₩"},
+    //     {value: "₴", label: "₴"},
+    //     {value: "₽", label: "₽"},
+    //     {value: "zł", label: "zł"},
+    // ]
+
     const currentDate = new Date();
     const dateString = `${currentDate.getFullYear()}-${formatTime(currentDate.getMonth()+1)}-${formatTime(currentDate.getDay())}`
 
-    const [selectedCurrency, setSelectedCurrency] = useState(currencySymbols[0].value);
+    const [selectedCurrency, setSelectedCurrency] = useState('');
     const [newCardName, setNewCardName] = useState('');
     const [startingBalance, setStartingBalance] = useState('');
-    const [currencySelector, setCurrencySelector] = useState(0)
+    const [currencySelector, setCurrencySelector] = useState(0);
 
     // const selectorRef = useRef();
+    const currencyRef = useRef();
 
+    useEffect(()=>{
+        setSelectedCurrency(currencySymbols[currencySelector]);
+    },[currencySelector, currencySymbols]);
+    
     function validateFormAndSaveCard(event){
         event.preventDefault()
         if (newCardName != '' && startingBalance.match(regex) && startingBalance != '' && selectedCurrency != ''){
@@ -50,12 +58,10 @@ function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCar
 
     function handleCurrencyChange(value){
         if (value === '+' && currencySymbols[currencySelector + 1] !== undefined){
-            setCurrencySelector(currencySelector + 1)
-            setSelectedCurrency(currencySymbols[currencySelector].value)
+            setCurrencySelector(currencySelector + 1);
         }
         else if (value === '-' && currencySymbols[currencySelector - 1] !== undefined){
-            setCurrencySelector(currencySelector - 1)
-            setSelectedCurrency(currencySymbols[currencySelector].value)           
+            setCurrencySelector(currencySelector - 1);     
         }
     }
 
@@ -76,7 +82,7 @@ function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCar
                 {/* <Select className='currencySelector' placeholder='Currency Type' ref={selectorRef} required options={currencySymbols} onChange={(e) => {setSelectedCurrency(e.value)}}/> */}
                 <div className="newCard-currencySelector">
                     <MdOutlineKeyboardArrowLeft size={24} onClick={()=>{handleCurrencyChange('-')}}/>
-                    <p>{currencySymbols[currencySelector].value}</p>
+                    <p ref={currencyRef}>{currencySymbols[currencySelector]}</p>
                     <MdOutlineKeyboardArrowRight size={24} onClick={()=>{handleCurrencyChange('+')}}/>
                 </div>
             </form>    
