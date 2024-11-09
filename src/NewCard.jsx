@@ -1,8 +1,9 @@
 import { FaArrowLeft } from "react-icons/fa";
-import Select from 'react-select';
+// import Select from 'react-select';
 import PropTypes from 'prop-types';
 
-import {useRef, useState} from 'react';
+import {useState} from 'react';
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCardSelector, setAndSave}) {
     const regex=/^[0-9.]+$/;
@@ -18,11 +19,12 @@ function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCar
     const currentDate = new Date();
     const dateString = `${currentDate.getFullYear()}-${formatTime(currentDate.getMonth()+1)}-${formatTime(currentDate.getDay())}`
 
-    const [selectedCurrency, setSelectedCurrency] = useState('');
+    const [selectedCurrency, setSelectedCurrency] = useState(currencySymbols[0].value);
     const [newCardName, setNewCardName] = useState('');
     const [startingBalance, setStartingBalance] = useState('');
+    const [currencySelector, setCurrencySelector] = useState(0)
 
-    const selectorRef = useRef();
+    // const selectorRef = useRef();
 
     function validateFormAndSaveCard(event){
         event.preventDefault()
@@ -39,9 +41,21 @@ function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCar
             setCardName(newCardName);
             setNewCardName('');
             setStartingBalance('');
-            selectorRef.current.setValue('');
+            // selectorRef.current.setValue('');
             setNewCardForm(false);
-            setCardSelector(false)
+            setCardSelector(false);
+            setCurrencySelector(0)
+        }
+    }
+
+    function handleCurrencyChange(value){
+        if (value === '+' && currencySymbols[currencySelector + 1] !== undefined){
+            setCurrencySelector(currencySelector + 1)
+            setSelectedCurrency(currencySymbols[currencySelector].value)
+        }
+        else if (value === '-' && currencySymbols[currencySelector - 1] !== undefined){
+            setCurrencySelector(currencySelector - 1)
+            setSelectedCurrency(currencySymbols[currencySelector].value)           
         }
     }
 
@@ -59,7 +73,12 @@ function NewCard({setNewCardForm, data, setData, formatTime, setCardName, setCar
                 <p>Starting Balance: </p>
                 <input type='number' value={startingBalance} required onChange={(e) => setStartingBalance(e.target.value)}placeholder="Starting Balance"></input>
                 <p>Currency Type: </p>
-                <Select className='currencySelector' placeholder='Currency Type' ref={selectorRef} required options={currencySymbols} onChange={(e) => {setSelectedCurrency(e.value)}}/>
+                {/* <Select className='currencySelector' placeholder='Currency Type' ref={selectorRef} required options={currencySymbols} onChange={(e) => {setSelectedCurrency(e.value)}}/> */}
+                <div className="newCard-currencySelector">
+                    <MdOutlineKeyboardArrowLeft size={24} onClick={()=>{handleCurrencyChange('-')}}/>
+                    <p>{currencySymbols[currencySelector].value}</p>
+                    <MdOutlineKeyboardArrowRight size={24} onClick={()=>{handleCurrencyChange('+')}}/>
+                </div>
             </form>    
             <button onClick={(e)=>{validateFormAndSaveCard(e)}}>Submit</button>    
         </div>

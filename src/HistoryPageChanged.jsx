@@ -97,6 +97,11 @@ function HistoryPageChanged({setNewTransaction, data, setData, selectedCard, for
         else {setPageSelector(pageSelector)}
     }
 
+    function reverseArray(object){
+        const reversed = [...object.transactions].reverse();
+        console.log(reversed)
+        return reversed;
+    }
     return(
         <>
         {selectedCard.name !== '' && selectedCard.transactionsData.length ?
@@ -122,7 +127,7 @@ function HistoryPageChanged({setNewTransaction, data, setData, selectedCard, for
                                             {totalExpensePerDay(i)}
                                         </span>    
                                         <hr />   
-                                        {i.transactions.reverse().map((e, index)=>{
+                                        {reverseArray(i).map((e, index)=>{
                                             return(           
                                                 <>
                                                     <span className='historyCard' key={index}>

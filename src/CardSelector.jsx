@@ -45,7 +45,7 @@ function CardSelector({data, setData, cardName, setCardName, setCardSelector, se
         <div className='backdropFilter'>
             {!newCardForm 
             ?
-                <div>
+                <div className='cardSelector-mainWrapper'>
                     <div className='cardSelector-svgAndTitle'>
                         <FaArrowLeft className='returnButton' onClick={() => {setCardSelector(false)}}/>
                         <h1 className='cardSelectorTitle fontThin'>Card Selector</h1>

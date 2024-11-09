@@ -74,6 +74,7 @@ button:focus-visible {
   backdrop-filter: blur(1rem);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 5px;
+  width: 100%;
 }
 
 .header-cardName-Icon{
@@ -465,6 +466,7 @@ form{
 }
 
 .newCardForm{
+  width: 23rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: center;
@@ -482,6 +484,7 @@ form{
   margin: auto;
   font-family: inherit;
   margin: 0.3rem;
+  text-align: center;
 }
 
 .currencySelector{
@@ -520,4 +523,24 @@ hr{
   margin-top: 0.2rem;
   color: black;
   border-radius: 5px
+}
+
+.newCard-currencySelector{
+  display: flex;
+  flex-direction: row;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+  border: transparent;
+  width: 90%;
+  height: 3rem;
+  border-radius: 5px;
+  background-color: hsl(120, 29%, 5%);
+  margin: auto;
+  font-family: inherit;
+  margin: 0.3rem;
+}
+
+.cardSelector-mainWrapper{
+  width: 23rem;
 }
